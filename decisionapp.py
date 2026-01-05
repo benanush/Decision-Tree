@@ -13,7 +13,7 @@ st.write("This app predicts the best **Subscription Plan** for a user based on t
 @st.cache_resource
 def load_and_train():
     # Load the dataset
-    df = pd.read_csv(r'C:\Users\benan\Documents\Data_Scientist\Streamlit\Movie_Interests_DecisionTree.csv')
+    df = pd.read_csv(r'Movie_Interests_DecisionTree.csv')
     
     # Initialize LabelEncoder for the Genre column
     le_genre = LabelEncoder()
@@ -76,4 +76,5 @@ with col2:
         st.write(f"**Genres recognized:** {', '.join(le_genre.classes_)}")
 
         st.write("**Features used:** Age, Gender, Usage Hours, Genre Preference")
+
 
