@@ -6,11 +6,11 @@ import os
 
 @st.cache_resource
 def load_and_train():
-    # DEBUG: show files in cloud
-    st.write("Files in directory:", os.listdir())
+    # show files available in Streamlit Cloud
+    st.write("Available files:", os.listdir())
 
-    # ✅ CORRECT PATH (relative)
-    df = pd.read_csv(r"movie_interests_decisiontree.csv")
+    # ✅ RELATIVE PATH ONLY
+    df = pd.read_csv("movie_interests_decisiontree.csv")
 
     le_genre = LabelEncoder()
     df["Genre_encoded"] = le_genre.fit_transform(df["Genre"])
@@ -24,16 +24,14 @@ def load_and_train():
     return model, le_genre, df
 
 
-st.title("🎬 Movie Interest Prediction")
+st.title("🎵 Music Subscription Plan Predictor")
 
 model, le_genre, df = load_and_train()
 
-age = st.slider("Select Age", 10, 70, 25)
-genre = st.selectbox("Select Genre", df["Genre"].unique())
+age = st.slider("Age", 10, 70, 25)
+genre = st.selectbox("Preferred Genre", df["Genre"].unique())
 
 genre_encoded = le_genre.transform([genre])[0]
 prediction = model.predict([[age, genre_encoded]])
 
-st.success(f"Predicted Interest: {prediction[0]}")
-
-
+st.success(f"Recommended Plan: {prediction[0]}")
