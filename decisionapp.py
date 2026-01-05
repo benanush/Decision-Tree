@@ -10,7 +10,7 @@ def load_and_train():
     st.write("Files in directory:", os.listdir())
 
     # ✅ CORRECT PATH (relative)
-    df = pd.read_csv("movie_interests_decisiontree.csv")
+    df = pd.read_csv(r"movie_interests_decisiontree.csv")
 
     le_genre = LabelEncoder()
     df["Genre_encoded"] = le_genre.fit_transform(df["Genre"])
@@ -35,4 +35,5 @@ genre_encoded = le_genre.transform([genre])[0]
 prediction = model.predict([[age, genre_encoded]])
 
 st.success(f"Predicted Interest: {prediction[0]}")
+
 
